@@ -1,10 +1,12 @@
 import { useContext, useState } from "react"
 import { SecretKeyCnx } from "../context/SecretKeyCnx";
+import { MyModal } from "../components/MyModal";
 
 export const CreatePage = () => {
 
 	const [inputText, setInputText] = useState("");
 	const [secretKey, setSecretKey] = useContext(SecretKeyCnx);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -14,9 +16,9 @@ export const CreatePage = () => {
 			str.push(inputText[i].charCodeAt() ^ secretKey);
 		}
 
-		console.log(str.join(" "));
+		console.log(`encrypted msg: ${str.join(" ")}`);
 		setInputText("");
-		setSecretKey("");
+		setIsModalOpen(true);
 	}
 
 	return (
@@ -33,6 +35,8 @@ export const CreatePage = () => {
 				<button className="btn">create</button>
 
 			</form>
+
+			<MyModal isOpen={isModalOpen} title={"your encrypted message"} body={secretKey} />
 		</div>
 	)
 }

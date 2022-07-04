@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export const App = () => {
 
-	const [secretKey, setSecretKey] = useState("")
+	const [secretKey, setSecretKey] = useState("");
 
 	return (
 		<BrowserRouter>
