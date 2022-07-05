@@ -7,6 +7,7 @@ export const CreatePage = () => {
 	const [inputText, setInputText] = useState("");
 	const [secretKey, setSecretKey] = useContext(SecretKeyCnx);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [encryptedMsg, setEncryptedMsg] = useState("");
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -16,7 +17,7 @@ export const CreatePage = () => {
 			str.push(inputText[i].charCodeAt() ^ secretKey);
 		}
 
-		console.log(`encrypted msg: ${str.join(" ")}`);
+		setEncryptedMsg(str.join(" "));
 		setInputText("");
 		setIsModalOpen(true);
 	}
@@ -36,7 +37,7 @@ export const CreatePage = () => {
 
 			</form>
 
-			<MyModal isOpen={isModalOpen} title={"your encrypted message"} body={secretKey} />
+			<MyModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} title={"your encrypted message"} body={encryptedMsg} />
 		</div>
 	)
 }
