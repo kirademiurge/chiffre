@@ -10,16 +10,20 @@ export const CreatePage = () => {
 	const [encryptedMsg, setEncryptedMsg] = useState("");
 
 	const onSubmit = (event) => {
-		event.preventDefault();
-		
-		let str = [];
-		for (let i = 0; i < inputText.length; i++) {
-			str.push(inputText[i].charCodeAt() ^ secretKey);
-		}
 
-		setEncryptedMsg(str.join(" "));
-		setInputText("");
-		setIsModalOpen(true);
+		event.preventDefault();
+
+		if (inputText !== "" && secretKey !== "") {
+		
+			let str = [];
+			for (let i = 0; i < inputText.length; i++) {
+				str.push(inputText[i].charCodeAt() ^ secretKey);
+			}
+
+			setEncryptedMsg(str.join(" "));
+			setInputText("");
+			setIsModalOpen(true);
+		}
 	}
 
 	return (
