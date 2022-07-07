@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { SecretKeyCnx } from "../context/SecretKeyCnx";
 import { MyModal } from "../components/MyModal";
+import { useEncrypt } from "../hooks/useEncrypt";
 
 export const CreatePage = () => {
 
@@ -13,14 +14,9 @@ export const CreatePage = () => {
 
 		event.preventDefault();
 
-		if (inputText !== "" && secretKey !== "") {
-		
-			let str = [];
-			for (let i = 0; i < inputText.length; i++) {
-				str.push(inputText[i].charCodeAt() ^ secretKey);
-			}
+		if (inputText !== "" && secretKey !== "") {	
 
-			setEncryptedMsg(str.join(" "));
+			setEncryptedMsg(useEncrypt(inputText, secretKey));
 			setInputText("");
 			setIsModalOpen(true);
 		}
